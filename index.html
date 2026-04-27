@@ -7,12 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
 body { font-family: 'DM Mono', monospace; background: #000; color: #fff; overflow-x: hidden; }
 
-#hero {
+section {
+  scroll-snap-align: start;
   height: 100vh;
-  min-height: 500px;
+}
+
+#hero {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -27,14 +30,14 @@ body { font-family: 'DM Mono', monospace; background: #000; color: #fff; overflo
   background-image: url('https://github.com/vqru/bahh-gifs/blob/main/sample_cc12fe80bd41e5e2e517bd8e940deedb.jpg?raw=true');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.55);
+  filter: brightness(0.52);
 }
 
 .hero-overlay {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.6) 0%, transparent 70%),
-    radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.3) 0%, transparent 60%);
+    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.25) 0%, transparent 60%);
 }
 
 .hero-content {
@@ -44,13 +47,13 @@ body { font-family: 'DM Mono', monospace; background: #000; color: #fff; overflo
 }
 
 .avatar {
-  width: 90px; height: 90px;
+  width: 110px; height: 110px;
   border-radius: 50%;
   border: 2.5px solid rgba(0,220,230,0.7);
   background: #111;
   overflow: hidden;
-  margin-bottom: 18px;
-  box-shadow: 0 0 28px rgba(0,200,220,0.3);
+  margin-bottom: 14px;
+  box-shadow: 0 0 32px rgba(0,200,220,0.25);
 }
 
 .avatar img {
@@ -60,59 +63,67 @@ body { font-family: 'DM Mono', monospace; background: #000; color: #fff; overflo
 
 .hero-name {
   font-family: 'Instrument Serif', serif;
-  font-size: 52px;
+  font-size: 48px;
   font-weight: 400;
   letter-spacing: -1px;
   color: #f0f8ff;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  line-height: 1;
   text-shadow: 0 2px 20px rgba(0,0,0,0.5);
 }
 
 .hero-handle {
-  font-size: 13px;
-  color: rgba(0,220,230,0.75);
-  letter-spacing: 0.05em;
-  margin-bottom: 20px;
+  font-size: 12px;
+  color: rgba(0,220,230,0.7);
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
 }
 
 .hero-bio {
   font-size: 13px;
-  color: rgba(220,240,255,0.85);
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 0.5px solid rgba(255,255,255,0.1);
-  border-radius: 12px;
-  padding: 14px 24px;
-  max-width: 320px;
-  line-height: 1.8;
+  color: rgba(230,245,255,0.9);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 14px 28px;
+  width: 340px;
+  line-height: 1.85;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 24px rgba(0,0,0,0.2);
 }
 
 .hero-bio b { color: #00dce6; font-weight: 500; }
 
-.scroll-arrow {
-  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-  font-size: 18px; color: rgba(255,255,255,0.4);
-  animation: bounce 2s infinite;
+.arrow {
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  font-size: 20px;
+  color: #fff;
   cursor: pointer; z-index: 1;
   border: none; background: none;
   font-family: 'DM Mono', monospace;
   text-decoration: none;
+  line-height: 1;
+  animation: pulse-dim 2s ease-in-out infinite;
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
-  50% { transform: translateX(-50%) translateY(6px); opacity: 0.8; }
+.arrow-down { bottom: 28px; }
+.arrow-up { top: 24px; }
+
+@keyframes pulse-dim {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 0.15; }
 }
 
 #links {
-  min-height: 100vh;
   background: #080808;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 60px 24px;
+  position: relative;
 }
 
 .section-label {
@@ -128,7 +139,7 @@ body { font-family: 'DM Mono', monospace; background: #000; color: #fff; overflo
 .link-list {
   width: 100%; max-width: 360px;
   display: flex; flex-direction: column; gap: 10px;
-  margin-bottom: 48px;
+  margin-bottom: 44px;
 }
 
 .link-item {
@@ -177,10 +188,12 @@ body { font-family: 'DM Mono', monospace; background: #000; color: #fff; overflo
       building things on the internet.
     </div>
   </div>
-  <a class="scroll-arrow" href="#links">∨</a>
+  <a class="arrow arrow-down" href="#links">∨</a>
 </section>
 
 <section id="links">
+  <a class="arrow arrow-up" href="#hero">∧</a>
+
   <p class="section-label">Projects</p>
   <div class="link-list">
     <a class="link-item" href="#">
