@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>vqru'</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧁</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💢</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
 body { font-family: 'DM Mono', monospace; background: #000; color: #fff; overflow-x: hidden; }
 
 section { scroll-snap-align: start; height: 100vh; }
@@ -54,11 +55,18 @@ section { scroll-snap-align: start; height: 100vh; }
 .hero-name {
   font-family: 'Instrument Serif', serif;
   font-size: 48px; font-weight: 400;
-  letter-spacing: -1px; color: #f0f8ff;
+  letter-spacing: -1px;
   margin-bottom: 4px; line-height: 1;
   text-shadow: 0 2px 20px rgba(0,0,0,0.5);
   opacity: 0;
-  animation: fadeUp 0.9s ease forwards 0.55s;
+  animation: fadeUp 0.9s ease forwards 0.55s, colorShift 6s ease-in-out infinite 1.5s;
+}
+
+@keyframes colorShift {
+  0%   { color: #f0f8ff; }
+  33%  { color: #b8f0f5; }
+  66%  { color: #e8d5ff; }
+  100% { color: #f0f8ff; }
 }
 
 .hero-handle {
@@ -69,9 +77,11 @@ section { scroll-snap-align: start; height: 100vh; }
 }
 
 .hero-bio {
-  font-size: 13px; color: rgba(230,245,255,0.92);
-  background: transparent;
-  border: 1px solid rgba(0,220,230,0.45);
+  font-size: 13px; color: rgba(180,210,215,0.75);
+  background: rgba(10,20,25,0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(0,220,230,0.3);
   border-radius: 14px; padding: 14px 28px;
   width: 340px; line-height: 1.85;
   opacity: 0;
