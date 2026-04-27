@@ -10,34 +10,27 @@
 html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
 body { font-family: 'DM Mono', monospace; background: #000; color: #fff; overflow-x: hidden; }
 
-section {
-  scroll-snap-align: start;
-  height: 100vh;
-}
+section { scroll-snap-align: start; height: 100vh; }
 
 #hero {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; overflow: hidden;
 }
 
 .hero-bg {
   position: absolute; inset: 0;
   background-image: url('https://github.com/vqru/bahh-gifs/blob/main/sample_cc12fe80bd41e5e2e517bd8e940deedb.jpg?raw=true');
-  background-size: cover;
-  background-position: center;
+  background-size: cover; background-position: center;
   filter: brightness(0.52);
 }
 
 .hero-overlay {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 70%),
-    radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.25) 0%, transparent 60%);
+    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.45) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.2) 0%, transparent 60%);
 }
 
 .hero-content {
@@ -46,94 +39,87 @@ section {
   align-items: center;
 }
 
+/* staggered fade-up animations */
 .avatar {
-  width: 110px; height: 110px;
-  border-radius: 50%;
+  width: 110px; height: 110px; border-radius: 50%;
   border: 2.5px solid rgba(0,220,230,0.7);
-  background: #111;
-  overflow: hidden;
+  background: #111; overflow: hidden;
   margin-bottom: 14px;
   box-shadow: 0 0 32px rgba(0,200,220,0.25);
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.1s;
 }
-
-.avatar img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
 
 .hero-name {
   font-family: 'Instrument Serif', serif;
-  font-size: 48px;
-  font-weight: 400;
-  letter-spacing: -1px;
-  color: #f0f8ff;
-  margin-bottom: 4px;
-  line-height: 1;
+  font-size: 48px; font-weight: 400;
+  letter-spacing: -1px; color: #f0f8ff;
+  margin-bottom: 4px; line-height: 1;
   text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.35s;
 }
 
 .hero-handle {
-  font-size: 12px;
-  color: rgba(0,220,230,0.7);
-  letter-spacing: 0.06em;
-  margin-bottom: 16px;
+  font-size: 12px; color: rgba(0,220,230,0.7);
+  letter-spacing: 0.06em; margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.5s;
 }
 
 .hero-bio {
-  font-size: 13px;
-  color: rgba(230,245,255,0.9);
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 14px;
-  padding: 14px 28px;
-  width: 340px;
-  line-height: 1.85;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 24px rgba(0,0,0,0.2);
+  font-size: 13px; color: rgba(230,245,255,0.92);
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-top: 1px solid rgba(255,255,255,0.28);
+  border-radius: 14px; padding: 14px 28px;
+  width: 340px; line-height: 1.85;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.65s;
 }
-
 .hero-bio b { color: #00dce6; font-weight: 500; }
 
-.arrow {
-  position: absolute;
-  left: 50%; transform: translateX(-50%);
-  font-size: 20px;
-  color: #fff;
-  cursor: pointer; z-index: 1;
-  border: none; background: none;
-  font-family: 'DM Mono', monospace;
-  text-decoration: none;
-  line-height: 1;
-  animation: pulse-dim 2s ease-in-out infinite;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
+/* arrow */
+.arrow {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  z-index: 1; cursor: pointer; text-decoration: none;
+  display: flex; align-items: center; justify-content: center;
+  animation: pulse-dim 2.5s ease-in-out infinite;
+}
 .arrow-down { bottom: 28px; }
-.arrow-up { top: 24px; }
+.arrow-up   { top: 28px; }
+
+.arrow svg { width: 22px; height: 13px; overflow: visible; }
 
 @keyframes pulse-dim {
-  0%, 100% { opacity: 0.85; }
-  50% { opacity: 0.15; }
+  0%, 100% { opacity: 0.75; }
+  50%       { opacity: 0.12; }
 }
 
 #links {
   background: #080808;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 24px;
-  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 60px 24px; position: relative;
 }
 
 .section-label {
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-size: 11px; letter-spacing: 0.18em;
   color: rgba(255,255,255,0.3);
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  width: 100%;
-  max-width: 360px;
+  text-transform: uppercase; margin-bottom: 14px;
+  width: 100%; max-width: 360px;
 }
 
 .link-list {
@@ -147,12 +133,9 @@ section {
   justify-content: space-between;
   background: #111;
   border: 0.5px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
-  padding: 14px 18px;
-  cursor: pointer;
-  text-decoration: none;
-  color: rgba(255,255,255,0.85);
-  font-size: 14px;
+  border-radius: 10px; padding: 14px 18px;
+  cursor: pointer; text-decoration: none;
+  color: rgba(255,255,255,0.85); font-size: 14px;
   font-family: 'DM Mono', monospace;
   transition: background 0.2s, border-color 0.2s, transform 0.2s, color 0.2s;
 }
@@ -161,9 +144,8 @@ section {
   background: #0a1f1f;
   border-color: rgba(0,220,230,0.35);
   color: #00dce6;
-  transform: translateX(6px);
+  transform: translateX(3px);
 }
-
 .link-item:hover .link-icon { color: #00dce6; }
 .link-item:hover .link-arrow { color: #00dce6; }
 
@@ -188,44 +170,40 @@ section {
       building things on the internet.
     </div>
   </div>
-  <a class="arrow arrow-down" href="#links">∨</a>
+  <a class="arrow arrow-down" href="#links">
+    <svg viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="1,1 11,11 21,1" stroke="rgba(200,200,210,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
 </section>
 
 <section id="links">
-  <a class="arrow arrow-up" href="#hero">∧</a>
+  <a class="arrow arrow-up" href="#hero">
+    <svg viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="1,11 11,1 21,11" stroke="rgba(200,200,210,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
 
   <p class="section-label">Projects</p>
   <div class="link-list">
-    <a class="link-item" href="#">
-      <div class="link-left"><span class="link-icon">✦</span> project one</div>
-      <span class="link-arrow">→</span>
-    </a>
-    <a class="link-item" href="#">
-      <div class="link-left"><span class="link-icon">✦</span> project two</div>
-      <span class="link-arrow">→</span>
-    </a>
-    <a class="link-item" href="#">
-      <div class="link-left"><span class="link-icon">✦</span> project three</div>
+    <a class="link-item" href="https://www.citlali.xyz/" target="_blank">
+      <div class="link-left"><span class="link-icon">✦</span> citlali</div>
       <span class="link-arrow">→</span>
     </a>
   </div>
 
   <p class="section-label">Socials</p>
   <div class="link-list">
-    <a class="link-item" href="mailto:you@email.com">
+    <a class="link-item" href="mailto:vqruwork@gmail.com">
       <div class="link-left"><span class="link-icon">@</span> email</div>
       <span class="link-arrow">→</span>
     </a>
-    <a class="link-item" href="https://twitter.com/vqru" target="_blank">
-      <div class="link-left"><span class="link-icon">𝕏</span> twitter</div>
-      <span class="link-arrow">→</span>
-    </a>
-    <a class="link-item" href="#">
+    <a class="link-item" href="https://discord.com/invite/qRwS8gMVBj" target="_blank">
       <div class="link-left"><span class="link-icon">#</span> discord</div>
       <span class="link-arrow">→</span>
     </a>
-    <a class="link-item" href="https://github.com/vqru" target="_blank">
-      <div class="link-left"><span class="link-icon">⌥</span> github</div>
+    <a class="link-item" href="https://www.youtube.com/@ovqru" target="_blank">
+      <div class="link-left"><span class="link-icon">▶</span> youtube</div>
       <span class="link-arrow">→</span>
     </a>
   </div>
