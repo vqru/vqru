@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>vqru</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Mono', monospace; background: #000; color: #fff; overflow-x: hidden; }
+
+#hero {
+  height: 100vh;
+  min-height: 500px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://github.com/vqru/bahh-gifs/blob/main/sample_cc12fe80bd41e5e2e517bd8e940deedb.jpg?raw=true');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.55);
+}
+
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.6) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.3) 0%, transparent 60%);
+}
+
+.hero-content {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(0,220,230,0.7);
+  background: #111;
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: 0 0 28px rgba(0,200,220,0.3);
+}
+
+.avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.hero-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 52px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  color: #f0f8ff;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+
+.hero-handle {
+  font-size: 13px;
+  color: rgba(0,220,230,0.75);
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+
+.hero-bio {
+  font-size: 13px;
+  color: rgba(220,240,255,0.85);
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 14px 24px;
+  max-width: 320px;
+  line-height: 1.8;
+}
+
+.hero-bio b { color: #00dce6; font-weight: 500; }
+
+.scroll-arrow {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  font-size: 18px; color: rgba(255,255,255,0.4);
+  animation: bounce 2s infinite;
+  cursor: pointer; z-index: 1;
+  border: none; background: none;
+  font-family: 'DM Mono', monospace;
+  text-decoration: none;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+  50% { transform: translateX(-50%) translateY(6px); opacity: 0.8; }
+}
+
+#links {
+  min-height: 100vh;
+  background: #080808;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.link-list {
+  width: 100%; max-width: 360px;
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 48px;
+}
+
+.link-item {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  background: #111;
+  border: 0.5px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 14px 18px;
+  cursor: pointer;
+  text-decoration: none;
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+  font-family: 'DM Mono', monospace;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, color 0.2s;
+}
+
+.link-item:hover {
+  background: #0a1f1f;
+  border-color: rgba(0,220,230,0.35);
+  color: #00dce6;
+  transform: translateX(6px);
+}
+
+.link-item:hover .link-icon { color: #00dce6; }
+.link-item:hover .link-arrow { color: #00dce6; }
+
+.link-left { display: flex; align-items: center; gap: 12px; }
+.link-icon { font-size: 14px; color: rgba(255,255,255,0.35); width: 18px; text-align: center; transition: color 0.2s; }
+.link-arrow { color: rgba(255,255,255,0.2); font-size: 14px; transition: color 0.2s; }
+</style>
+</head>
+<body>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="avatar">
+      <img src="https://images-ext-1.discordapp.net/external/7EJEnMkp3Nz7ftq-KorGskRNBNG6qJJNMIDw1G1A6h8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/819817532579905557/a7685183be101337a904301e1165a44f.png?format=webp&quality=lossless&width=320&height=320" alt="vqru">
+    </div>
+    <h1 class="hero-name">vqru</h1>
+    <p class="hero-handle">@vqru</p>
+    <div class="hero-bio">
+      student. <b>python nerd</b> &amp; code goblin.<br>
+      building things on the internet.
+    </div>
+  </div>
+  <a class="scroll-arrow" href="#links">∨</a>
+</section>
+
+<section id="links">
+  <p class="section-label">Projects</p>
+  <div class="link-list">
+    <a class="link-item" href="#">
+      <div class="link-left"><span class="link-icon">✦</span> project one</div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a class="link-item" href="#">
+      <div class="link-left"><span class="link-icon">✦</span> project two</div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a class="link-item" href="#">
+      <div class="link-left"><span class="link-icon">✦</span> project three</div>
+      <span class="link-arrow">→</span>
+    </a>
+  </div>
+
+  <p class="section-label">Socials</p>
+  <div class="link-list">
+    <a class="link-item" href="mailto:you@email.com">
+      <div class="link-left"><span class="link-icon">@</span> email</div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a class="link-item" href="https://twitter.com/vqru" target="_blank">
+      <div class="link-left"><span class="link-icon">𝕏</span> twitter</div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a class="link-item" href="#">
+      <div class="link-left"><span class="link-icon">#</span> discord</div>
+      <span class="link-arrow">→</span>
+    </a>
+    <a class="link-item" href="https://github.com/vqru" target="_blank">
+      <div class="link-left"><span class="link-icon">⌥</span> github</div>
+      <span class="link-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+</body>
+</html>
