@@ -2,210 +2,303 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>vqru'</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💢</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<title>vqru</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-snap-type: y mandatory; scrollbar-width: none; }
-html::-webkit-scrollbar { display: none; }
-body { font-family: 'DM Mono', monospace; background: #000; color: #fff; overflow-x: hidden; }
-
-section { scroll-snap-align: start; height: 100vh; }
-
-#hero {
-  position: relative;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute; inset: 0;
-  background-image: url('https://github.com/vqru/bahh-gifs/blob/main/sample_cc12fe80bd41e5e2e517bd8e940deedb.jpg?raw=true');
-  background-size: cover; background-position: center;
-  filter: brightness(0.52);
-}
-
-.hero-overlay {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.45) 0%, transparent 70%),
-    radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.2) 0%, transparent 60%);
-}
-
-.hero-content {
-  position: relative; z-index: 1;
-  display: flex; flex-direction: column;
-  align-items: center;
-}
-
-.avatar {
-  width: 110px; height: 110px; border-radius: 50%;
-  border: 2.5px solid rgba(0,220,230,0.7);
-  background: #111; overflow: hidden;
-  margin-bottom: 14px;
-  box-shadow: 0 0 32px rgba(0,200,220,0.25);
-  opacity: 0;
-  animation: fadeUp 0.9s ease forwards 0.15s;
-}
-.avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-.hero-name {
-  font-family: 'Instrument Serif', serif;
-  font-size: 48px; font-weight: 400;
-  letter-spacing: -1px;
-  margin-bottom: 4px; line-height: 1;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-  opacity: 0;
-  animation: fadeUp 0.9s ease forwards 0.55s, colorShift 6s ease-in-out infinite 1.5s;
-}
-
-@keyframes colorShift {
-  0%   { color: #f0f8ff; }
-  33%  { color: #b8f0f5; }
-  66%  { color: #e8d5ff; }
-  100% { color: #f0f8ff; }
-}
-
-.hero-handle {
-  font-size: 12px; color: rgba(0,220,230,0.7);
-  letter-spacing: 0.06em; margin-bottom: 16px;
-  opacity: 0;
-  animation: fadeUp 0.9s ease forwards 0.75s;
-}
-
-.hero-bio {
-  font-size: 13px; color: rgba(200,225,230,0.7);
-  background: none;
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 14px; padding: 14px 28px;
-  width: 340px; line-height: 1.85;
-  opacity: 0;
-  animation: fadeUp 0.9s ease forwards 0.95s;
-}
-.hero-bio b { color: #00dce6; font-weight: 500; }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.arrow {
-  position: absolute; left: 50%; transform: translateX(-50%);
-  z-index: 1; cursor: pointer; text-decoration: none;
-  display: flex; align-items: center; justify-content: center;
-  animation: pulse-dim 2.5s ease-in-out infinite;
-}
-.arrow-down { bottom: 28px; }
-.arrow-up   { top: 28px; }
-.arrow svg  { width: 22px; height: 13px; overflow: visible; }
-
-@keyframes pulse-dim {
-  0%, 100% { opacity: 0.75; }
-  50%       { opacity: 0.12; }
-}
-
-#links {
-  background: #080808;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 60px 24px; position: relative;
-}
-
-.section-label {
-  font-size: 11px; letter-spacing: 0.18em;
-  color: rgba(255,255,255,0.3);
-  text-transform: uppercase; margin-bottom: 14px;
-  width: 100%; max-width: 360px;
-}
-
-.link-list {
-  width: 100%; max-width: 360px;
-  display: flex; flex-direction: column; gap: 10px;
-  margin-bottom: 44px;
-}
-
-.link-item {
-  display: flex; align-items: center;
-  justify-content: space-between;
-  background: #111;
-  border: 0.5px solid rgba(0,180,190,0.25);
-  border-radius: 10px; padding: 14px 18px;
-  cursor: pointer; text-decoration: none;
-  color: rgba(255,255,255,0.85); font-size: 14px;
-  font-family: 'DM Mono', monospace;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s, color 0.2s;
-}
-
-.link-item:hover {
-  background: #0a1f1f;
-  border-color: rgba(0,220,230,0.35);
-  color: #00dce6; transform: translateX(4px);
-}
-.link-item:hover .link-icon { color: #00dce6; }
-.link-item:hover .link-arrow { color: #00dce6; }
-
-.link-left { display: flex; align-items: center; gap: 12px; }
-.link-icon { font-size: 14px; color: rgba(255,255,255,0.35); width: 18px; text-align: center; transition: color 0.2s; }
-.link-arrow { color: rgba(255,255,255,0.2); font-size: 14px; transition: color 0.2s; }
+  html, body {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    background: #0a0a0a;
+    overflow: hidden;
+  }
+  #stage {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+  #stage > div {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  #stage canvas {
+    display: none;
+  }
+  #stage pre {
+    margin: 0;
+    user-select: none;
+    padding: 0;
+    line-height: 1em;
+    white-space: pre;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #dfe9ec;
+    z-index: 9;
+  }
+  .bio-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    transform: translateX(-50%);
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #eee;
+    background: transparent;
+    border: 2px solid #666;
+    border-radius: 999px;
+    padding: 14px 40px;
+    cursor: pointer;
+    z-index: 20;
+  }
+  .bio-btn:hover {
+    border-color: #ccc;
+    color: #fff;
+  }
 </style>
 </head>
 <body>
+<div id="stage"></div>
+<button class="bio-btn">Bio</button>
 
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="avatar">
-      <img src="https://images-ext-1.discordapp.net/external/7EJEnMkp3Nz7ftq-KorGskRNBNG6qJJNMIDw1G1A6h8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/819817532579905557/a7685183be101337a904301e1165a44f.png?format=webp&quality=lossless&width=320&height=320" alt="vqru">
-    </div>
-    <h1 class="hero-name">vqru</h1>
-    <p class="hero-handle">@vqru</p>
-    <div class="hero-bio">
-      minecraft nd ken carson enjoyer.<br>
-      Fuck dat hoe for me 5 🖤
-    </div>
-  </div>
-  <a class="arrow arrow-down" href="#links">
-    <svg viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="1,1 11,11 21,1" stroke="rgba(200,200,210,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </a>
-</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const TEXT = "vqru";
 
-<section id="links">
-  <a class="arrow arrow-up" href="#hero">
-    <svg viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="1,11 11,1 21,11" stroke="rgba(200,200,210,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </a>
+// ---------- Vertex/Fragment shaders (wave distortion + chromatic shimmer) ----------
+const vertexShader = `
+varying vec2 vUv;
+uniform float uTime;
+uniform float uEnableWaves;
+void main() {
+    vUv = uv;
+    float time = uTime * 5.0;
+    float waveFactor = uEnableWaves;
+    vec3 transformed = position;
+    transformed.x += sin(time + position.y) * 0.5 * waveFactor;
+    transformed.y += cos(time + position.z) * 0.15 * waveFactor;
+    transformed.z += sin(time + position.x) * waveFactor;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
+}
+`;
 
-  <p class="section-label">Projects</p>
-  <div class="link-list">
-    <a class="link-item" href="https://www.citlali.xyz/" target="_blank">
-      <div class="link-left"><span class="link-icon">✦</span> citlali</div>
-      <span class="link-arrow">→</span>
-    </a>
-  </div>
+const fragmentShader = `
+varying vec2 vUv;
+uniform float uTime;
+uniform sampler2D uTexture;
+void main() {
+    float time = uTime;
+    vec2 pos = vUv;
+    float r = texture2D(uTexture, pos + cos(time * 2.0 - time + pos.x) * 0.01).r;
+    float g = texture2D(uTexture, pos + tan(time * 0.5 + pos.x - time) * 0.01).g;
+    float b = texture2D(uTexture, pos - cos(time * 2.0 + time + pos.y) * 0.01).b;
+    float a = texture2D(uTexture, pos).a;
+    gl_FragColor = vec4(r, g, b, a);
+}
+`;
 
-  <p class="section-label">Socials</p>
-  <div class="link-list">
-    <a class="link-item" href="mailto:vqruwork@gmail.com">
-      <div class="link-left"><span class="link-icon">@</span> email</div>
-      <span class="link-arrow">→</span>
-    </a>
-    <a class="link-item" href="https://discord.com/invite/qRwS8gMVBj" target="_blank">
-      <div class="link-left"><span class="link-icon">#</span> discord</div>
-      <span class="link-arrow">→</span>
-    </a>
-    <a class="link-item" href="https://www.youtube.com/@ovqru" target="_blank">
-      <div class="link-left"><span class="link-icon">▶</span> youtube</div>
-      <span class="link-arrow">→</span>
-    </a>
-  </div>
-</section>
+// ---------- Text-to-canvas texture generator ----------
+class TextCanvas {
+  constructor(text, { fontSize = 200, fontFamily = "Arial", color = "#fdf9f3" } = {}) {
+    this.canvas = document.createElement('canvas');
+    this.context = this.canvas.getContext('2d');
+    this.txt = text;
+    this.fontSize = fontSize;
+    this.fontFamily = fontFamily;
+    this.color = color;
+    this.font = `600 ${this.fontSize}px ${this.fontFamily}`;
+  }
+  resize() {
+    this.context.font = this.font;
+    const m = this.context.measureText(this.txt);
+    this.canvas.width = Math.ceil(m.width) + 20;
+    this.canvas.height = Math.ceil(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent) + 20;
+  }
+  render() {
+    const ctx = this.context;
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.fillStyle = this.color;
+    ctx.font = this.font;
+    const y = 10 + ctx.measureText(this.txt).actualBoundingBoxAscent;
+    ctx.fillText(this.txt, 10, y);
+  }
+  get width() { return this.canvas.width; }
+  get height() { return this.canvas.height; }
+  get texture() { return this.canvas; }
+}
 
+// ---------- ASCII post-process filter ----------
+class AsciiFilter {
+  constructor(renderer, { fontSize = 12, fontFamily = "'Courier New', monospace", charset, invert = true } = {}) {
+    this.renderer = renderer;
+    this.domElement = document.createElement('div');
+    this.domElement.style.position = 'absolute';
+    this.domElement.style.inset = '0';
+    this.pre = document.createElement('pre');
+    this.domElement.appendChild(this.pre);
+    this.canvas = document.createElement('canvas');
+    this.context = this.canvas.getContext('2d');
+    this.domElement.appendChild(this.canvas);
+    this.deg = 0;
+    this.invert = invert;
+    this.fontSize = fontSize;
+    this.fontFamily = fontFamily;
+    this.charset = charset || " .'`^\",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+    this.context.imageSmoothingEnabled = false;
+    this.mouse = { x: 0, y: 0 };
+    this.center = { x: 0, y: 0 };
+    this.onMouseMove = this.onMouseMove.bind(this);
+    document.addEventListener('mousemove', this.onMouseMove);
+  }
+  setSize(w, h) {
+    this.width = w; this.height = h;
+    this.renderer.setSize(w, h);
+    this.reset();
+    this.center = { x: w / 2, y: h / 2 };
+    this.mouse = { x: this.center.x, y: this.center.y };
+  }
+  reset() {
+    const ctx = this.context;
+    ctx.font = `${this.fontSize}px ${this.fontFamily}`;
+    const charW = ctx.measureText("A").width;
+    this.cols = Math.floor(this.width / (this.fontSize * (charW / this.fontSize)));
+    this.rows = Math.floor(this.height / this.fontSize);
+    this.canvas.width = this.cols;
+    this.canvas.height = this.rows;
+    this.pre.style.fontFamily = this.fontFamily;
+    this.pre.style.fontSize = this.fontSize + 'px';
+  }
+  render(scene, camera) {
+    this.renderer.render(scene, camera);
+    const w = this.canvas.width, h = this.canvas.height;
+    if (!w || !h) return;
+    this.context.clearRect(0, 0, w, h);
+    this.context.drawImage(this.renderer.domElement, 0, 0, w, h);
+    this.asciify(w, h);
+    this.hue();
+  }
+  onMouseMove(e) {
+    this.mouse = { x: e.clientX * (window.devicePixelRatio || 1), y: e.clientY * (window.devicePixelRatio || 1) };
+  }
+  get dx() { return this.mouse.x - this.center.x; }
+  get dy() { return this.mouse.y - this.center.y; }
+  hue() {
+    const target = 180 * Math.atan2(this.dy, this.dx) / Math.PI;
+    this.deg += (target - this.deg) * 0.075;
+    this.domElement.style.filter = `hue-rotate(${this.deg.toFixed(1)}deg)`;
+  }
+  asciify(w, h) {
+    const data = this.context.getImageData(0, 0, w, h).data;
+    let out = '';
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        const i = (x + y * w) * 4;
+        const rr = data[i], gg = data[i+1], bb = data[i+2], aa = data[i+3];
+        if (aa === 0) { out += ' '; continue; }
+        let idx = Math.floor((1 - (0.3*rr + 0.6*gg + 0.1*bb) / 255) * (this.charset.length - 1));
+        if (this.invert) idx = this.charset.length - idx - 1;
+        out += this.charset[idx];
+      }
+      out += '\n';
+    }
+    this.pre.innerHTML = out;
+  }
+}
+
+// ---------- Scene setup ----------
+class AsciiTextScene {
+  constructor({ text, asciiFontSize = 16, textFontSize = 200, textColor = "#fdf9f3", planeBaseHeight = 8, enableWaves = true }, container, width, height) {
+    this.textString = text;
+    this.container = container;
+    this.width = width; this.height = height;
+    this.enableWaves = enableWaves;
+
+    this.camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+    this.camera.position.z = 30;
+    this.scene = new THREE.Scene();
+    this.mouse = { x: 0, y: 0 };
+    this.onMouseMove = this.onMouseMove.bind(this);
+
+    this.textCanvas = new TextCanvas(text, { fontSize: textFontSize, fontFamily: "Martian Mono, monospace", color: textColor });
+    this.textCanvas.resize();
+    this.textCanvas.render();
+    this.texture = new THREE.CanvasTexture(this.textCanvas.texture);
+    this.texture.minFilter = THREE.LinearFilter;
+
+    const aspect = this.textCanvas.width / this.textCanvas.height;
+    const h = planeBaseHeight;
+    this.geometry = new THREE.PlaneGeometry(h * aspect, h, 36, 36);
+    this.material = new THREE.ShaderMaterial({
+      vertexShader, fragmentShader, transparent: true,
+      uniforms: {
+        uTime: { value: 0 },
+        uTexture: { value: this.texture },
+        uEnableWaves: { value: enableWaves ? 1 : 0 }
+      }
+    });
+    this.mesh = new THREE.Mesh(this.geometry, this.material);
+    this.scene.add(this.mesh);
+
+    this.renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
+    this.renderer.setPixelRatio(1);
+    this.renderer.setClearColor(0, 0);
+    this.filter = new AsciiFilter(this.renderer, { fontFamily: "Martian Mono, monospace", fontSize: asciiFontSize, invert: true });
+    this.container.appendChild(this.filter.domElement);
+    this.setSize(width, height);
+    this.container.addEventListener('mousemove', this.onMouseMove);
+  }
+  setSize(w, h) {
+    this.width = w; this.height = h;
+    this.camera.aspect = w / h;
+    this.camera.updateProjectionMatrix();
+    this.filter.setSize(w, h);
+    this.center = { x: w / 2, y: h / 2 };
+  }
+  load() { this.animate(); }
+  onMouseMove(e) {
+    const rect = this.container.getBoundingClientRect();
+    this.mouse = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }
+  animate() {
+    const loop = () => {
+      this.animationFrameId = requestAnimationFrame(loop);
+      this.render();
+    };
+    loop();
+  }
+  render() {
+    const t = 0.001 * Date.now();
+    this.textCanvas.render();
+    this.texture.needsUpdate = true;
+    this.material.uniforms.uTime.value = Math.sin(t);
+    this.updateRotation();
+    this.filter.render(this.scene, this.camera);
+  }
+  updateRotation() {
+    const rx = -((this.mouse.y - 0) / (this.height - 0)) + 0.5;
+    const ry = (this.mouse.x - 0) / (this.width - 0) - 0.5;
+    this.mesh.rotation.x += (rx - this.mesh.rotation.x) * 0.05;
+    this.mesh.rotation.y += (ry - this.mesh.rotation.y) * 0.05;
+  }
+}
+
+// ---------- Boot ----------
+const stage = document.getElementById('stage');
+const scene = new AsciiTextScene({
+  text: TEXT,
+  asciiFontSize: 16,
+  textFontSize: 200,
+  textColor: "#fdf9f3",
+  planeBaseHeight: 8,
+  enableWaves: true
+}, stage, window.innerWidth, window.innerHeight);
+scene.load();
+
+window.addEventListener('resize', () => {
+  scene.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
 </body>
 </html>
