@@ -108,7 +108,7 @@ class TextCanvas {
     this.fontSize = fontSize;
     this.fontFamily = fontFamily;
     this.color = color;
-    this.font = `600 ${this.fontSize}px ${this.fontFamily}`;
+    this.font = `900 ${this.fontSize}px ${this.fontFamily}`;
   }
   resize() {
     this.context.font = this.font;
@@ -145,7 +145,7 @@ class AsciiFilter {
     this.invert = invert;
     this.fontSize = fontSize;
     this.fontFamily = fontFamily;
-    this.charset = charset || " .'`^\",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+    this.charset = charset || " .'`^\",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@@@@$";
     this.context.imageSmoothingEnabled = false;
     this.mouse = { x: 0, y: 0 };
     this.center = { x: 0, y: 0 };
@@ -191,6 +191,7 @@ class AsciiFilter {
   }
   asciify(w, h) {
     const data = this.context.getImageData(0, 0, w, h).data;
+    const colors = ['#6bb8db','#5aa6c9','#7cc9e8','#4caf50','#66bb6a','#81c784','#e0a458','#d4915a','#a855f7','#ec4899','#ef5350'];
     let out = '';
     for (let y = 0; y < h; y++) {
       for (let x = 0; x < w; x++) {
@@ -199,7 +200,11 @@ class AsciiFilter {
         if (aa === 0) { out += ' '; continue; }
         let idx = Math.floor((1 - (0.3*rr + 0.6*gg + 0.1*bb) / 255) * (this.charset.length - 1));
         if (this.invert) idx = this.charset.length - idx - 1;
-        out += this.charset[idx];
+        const ch = this.charset[idx];
+        if (ch === ' ') { out += ' '; continue; }
+        const useColor = Math.random() < 0.28;
+        const color = useColor ? colors[Math.floor(Math.random()*colors.length)] : '#f0f4f5';
+        out += `<span style="color:${color}">${ch}</span>`;
       }
       out += '\n';
     }
